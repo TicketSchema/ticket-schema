@@ -19,7 +19,7 @@ def build_registry():
     core = load_json(CORE)
     resources.append((core["$id"], Resource.from_contents(core)))
     # Local relative refs used by profiles.
-    resources.append(("https://paperspec.org/schema/v0.1/core.schema.json", Resource.from_contents(core)))
+    resources.append(("https://ticketschema.org/schema/v0.1/core.schema.json", Resource.from_contents(core)))
     for path in PROFILES.glob("*.schema.json"):
         schema = load_json(path)
         resources.append((schema["$id"], Resource.from_contents(schema)))

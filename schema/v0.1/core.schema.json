@@ -1,12 +1,12 @@
 {
-  "$id": "https://paperspec.org/schema/v0.1/core.json",
+  "$id": "https://ticketschema.org/schema/v0.1/core.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "PaperSpec Core Document",
+  "title": "Ticket Schema Core Document",
   "description": "Core schema for digital documents that replace physical paper.",
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "paperSpecVersion",
+    "ticketSchemaVersion",
     "id",
     "documentType",
     "status",
@@ -16,10 +16,10 @@
   ],
   "properties": {
     "$schema": { "type": "string", "format": "uri" },
-    "paperSpecVersion": { "const": "0.1" },
+    "ticketSchemaVersion": { "const": "0.1" },
     "id": {
       "type": "string",
-      "pattern": "^ps_[A-Za-z0-9_-]{12,}$"
+      "pattern": "^ts_[A-Za-z0-9_-]{12,}$"
     },
     "documentType": {
       "type": "string",

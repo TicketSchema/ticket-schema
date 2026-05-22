@@ -1,6 +1,6 @@
-# PaperSpec
+# Ticket Schema
 
-PaperSpec is an open JSON Schema standard for digital documents that replace physical paper: receipts, payment notes, delivery notes, warranties, loan notes, service records, reservations, and related transaction records.
+Ticket Schema is an open JSON Schema standard for digital documents that replace physical paper: receipts, payment notes, delivery notes, warranties, loan notes, service records, reservations, and related transaction records.
 
 ## Status
 
@@ -8,7 +8,7 @@ Draft `v0.1`.
 
 ## Core idea
 
-A PaperSpec document is:
+A Ticket Schema document is:
 
 - portable;
 - machine-readable;
@@ -21,9 +21,9 @@ A PaperSpec document is:
 
 ```json
 {
-  "$schema": "https://paperspec.org/schema/v0.1/core.json",
-  "paperSpecVersion": "0.1",
-  "id": "ps_01HX0000000000000000000000",
+  "$schema": "https://ticketschema.org/schema/v0.1/core.json",
+  "ticketSchemaVersion": "0.1",
+  "id": "ts_01HX0000000000000000000000",
   "documentType": "payment_receipt",
   "status": "issued",
   "issuedAt": "2026-05-22T10:00:00-06:00",
@@ -36,8 +36,8 @@ A PaperSpec document is:
 
 Apps should say:
 
-- `PaperSpec-compatible`
-- `Validated by PaperSpec Schema`
+- `Ticket Schema-compatible`
+- `Validated by Ticket Schema`
 
 ## Repository layout
 
