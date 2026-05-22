@@ -1,0 +1,17 @@
+{
+  "$id": "https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ticket Schema Retail Receipt Profile",
+  "allOf": [
+    { "$ref": "../core.schema.json" },
+    {
+      "type": "object",
+      "required": ["amounts", "currency", "items"],
+      "properties": {
+        "documentType": { "const": "retail_receipt" },
+        "amounts": { "type": "object", "required": ["total"] },
+        "items": { "type": "array", "minItems": 1 }
+      }
+    }
+  ]
+}

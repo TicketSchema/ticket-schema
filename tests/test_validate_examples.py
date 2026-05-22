@@ -23,6 +23,10 @@ def build_registry():
     for path in PROFILES.glob("*.schema.json"):
         schema = load_json(path)
         resources.append((schema["$id"], Resource.from_contents(schema)))
+        # File-name based URI variant, e.g. schema file payment-receipt.schema.json
+        # has canonical $id ending payment-receipt.json.
+        file_uri = f"https://ticketschema.org/schema/v0.1/profiles/{path.name.replace('.schema.json', '.json')}"
+        resources.append((file_uri, Resource.from_contents(schema)))
     return Registry().with_resources(resources)
 
 

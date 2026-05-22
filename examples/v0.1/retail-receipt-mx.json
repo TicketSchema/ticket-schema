@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json",
+  "ticketSchemaVersion": "0.1",
+  "id": "ts_01HX0000000000000000000101",
+  "documentType": "retail_receipt",
+  "status": "paid",
+  "issuedAt": "2026-05-22T18:30:00-06:00",
+  "currency": "MXN",
+  "parties": [
+    { "role": "seller", "name": "Abarrotes Lupita" },
+    { "role": "buyer", "name": "Cliente mostrador" }
+  ],
+  "amounts": { "subtotal": 86, "tax": 0, "total": 86, "paid": 86, "balance": 0 },
+  "items": [
+    { "description": "Leche 1L", "quantity": 1, "unitPrice": 28, "total": 28 },
+    { "description": "Pan dulce", "quantity": 4, "unitPrice": 14.5, "total": 58 }
+  ],
+  "events": [
+    { "type": "issued", "at": "2026-05-22T18:30:00-06:00", "by": "seller" },
+    { "type": "payment_recorded", "at": "2026-05-22T18:30:05-06:00", "amount": 86, "currency": "MXN", "method": "cash", "statusAfter": "paid" }
+  ]
+}

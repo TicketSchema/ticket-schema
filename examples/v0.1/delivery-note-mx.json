@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ticketschema.org/schema/v0.1/profiles/delivery-note.json",
+  "ticketSchemaVersion": "0.1",
+  "id": "ts_01HX0000000000000000000103",
+  "documentType": "delivery_note",
+  "status": "fulfilled",
+  "issuedAt": "2026-05-22T14:15:00-06:00",
+  "parties": [
+    { "role": "sender", "name": "Bodega Central" },
+    { "role": "receiver", "name": "Sucursal Roma" }
+  ],
+  "items": [
+    { "description": "Caja de refacciones", "quantity": 3, "unit": "box" }
+  ],
+  "events": [
+    { "type": "issued", "at": "2026-05-22T14:15:00-06:00", "by": "sender" },
+    { "type": "delivery_recorded", "at": "2026-05-22T16:45:00-06:00", "by": "sender", "statusAfter": "fulfilled" },
+    { "type": "received_confirmed", "at": "2026-05-22T16:50:00-06:00", "by": "receiver", "statusAfter": "fulfilled" }
+  ]
+}

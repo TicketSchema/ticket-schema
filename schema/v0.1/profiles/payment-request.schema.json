@@ -1,0 +1,17 @@
+{
+  "$id": "https://ticketschema.org/schema/v0.1/profiles/payment-request.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ticket Schema Payment Request Profile",
+  "allOf": [
+    { "$ref": "../core.schema.json" },
+    {
+      "type": "object",
+      "required": ["amounts", "currency", "terms"],
+      "properties": {
+        "documentType": { "const": "payment_request" },
+        "status": { "enum": ["issued", "pending", "partially_paid", "paid", "expired", "voided", "disputed"] },
+        "amounts": { "type": "object", "required": ["total", "balance"] }
+      }
+    }
+  ]
+}

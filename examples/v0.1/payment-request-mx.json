@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ticketschema.org/schema/v0.1/profiles/payment-request.json",
+  "ticketSchemaVersion": "0.1",
+  "id": "ts_01HX0000000000000000000102",
+  "documentType": "payment_request",
+  "status": "pending",
+  "issuedAt": "2026-05-22T09:00:00-06:00",
+  "currency": "MXN",
+  "parties": [
+    { "role": "payee", "name": "Taller El Rápido" },
+    { "role": "payer", "name": "Cliente" }
+  ],
+  "amounts": { "total": 750, "paid": 0, "balance": 750 },
+  "terms": { "dueDate": "2026-05-29", "description": "Anticipo pendiente por reparación" },
+  "events": [
+    { "type": "issued", "at": "2026-05-22T09:00:00-06:00", "by": "payee" },
+    { "type": "payment_requested", "at": "2026-05-22T09:00:01-06:00", "amount": 750, "currency": "MXN", "statusAfter": "pending" }
+  ]
+}

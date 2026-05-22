@@ -1,0 +1,16 @@
+{
+  "$id": "https://ticketschema.org/schema/v0.1/profiles/service-record.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ticket Schema Service Record Profile",
+  "allOf": [
+    { "$ref": "../core.schema.json" },
+    {
+      "type": "object",
+      "required": ["terms"],
+      "properties": {
+        "documentType": { "const": "service_record" },
+        "status": { "enum": ["issued", "pending", "partially_fulfilled", "fulfilled", "paid", "partially_paid", "voided", "disputed", "archived"] }
+      }
+    }
+  ]
+}
