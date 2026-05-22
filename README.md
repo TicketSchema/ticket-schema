@@ -41,8 +41,18 @@ Apps should say:
 
 ## Validator
 
+CLI:
+
 ```bash
 python3 tools/ticket_schema_validator.py validate examples/v0.1/retail-receipt-mx.json
+```
+
+REST API:
+
+```bash
+curl -X POST https://ticketschema.org/api/validate \
+  -H 'content-type: application/json' \
+  --data @examples/v0.1/retail-receipt-mx.json
 ```
 
 ## Repository layout

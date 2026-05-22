@@ -1,0 +1,16 @@
+{
+  "name": "ticket-schema",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:web": "node --test tests/*.test.mjs",
+    "build:schemas": "node scripts/build-schema-registry.mjs"
+  },
+  "dependencies": {
+    "@cfworker/json-schema": "^4.1.1"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
