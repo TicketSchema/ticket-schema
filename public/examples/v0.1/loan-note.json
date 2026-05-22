@@ -1,0 +1,37 @@
+{
+  "$schema": "https://ticketschema.org/schema/v0.1/profiles/loan-note.json",
+  "ticketSchemaVersion": "0.1",
+  "id": "ts_01HX0000000000000000000002",
+  "documentType": "loan_note",
+  "status": "partially_paid",
+  "issuedAt": "2026-05-22T12:00:00-06:00",
+  "currency": "MXN",
+  "parties": [
+    { "role": "issuer", "name": "Albin" },
+    { "role": "recipient", "name": "Carlos" }
+  ],
+  "amounts": {
+    "total": 1500,
+    "paid": 500,
+    "balance": 1000
+  },
+  "terms": {
+    "dueDate": "2026-06-15",
+    "description": "Préstamo personal"
+  },
+  "events": [
+    {
+      "type": "issued",
+      "at": "2026-05-22T12:00:00-06:00",
+      "by": "issuer"
+    },
+    {
+      "type": "payment_recorded",
+      "at": "2026-05-29T10:00:00-06:00",
+      "amount": 500,
+      "currency": "MXN",
+      "method": "cash",
+      "statusAfter": "partially_paid"
+    }
+  ]
+}

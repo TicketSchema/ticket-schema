@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ticketschema.org/schema/v0.1/profiles/service-record.json",
+  "ticketSchemaVersion": "0.1",
+  "id": "ts_01HX0000000000000000000104",
+  "documentType": "service_record",
+  "status": "partially_paid",
+  "issuedAt": "2026-05-22T11:20:00-06:00",
+  "currency": "MXN",
+  "parties": [
+    { "role": "service_provider", "name": "Plomería García" },
+    { "role": "customer", "name": "Cliente" }
+  ],
+  "amounts": { "total": 1200, "paid": 600, "balance": 600 },
+  "terms": { "description": "Cambio de mezcladora y revisión de fuga", "dueDate": "2026-05-25" },
+  "events": [
+    { "type": "issued", "at": "2026-05-22T11:20:00-06:00", "by": "service_provider" },
+    { "type": "service_completed", "at": "2026-05-22T13:10:00-06:00", "by": "service_provider", "statusAfter": "fulfilled" },
+    { "type": "payment_recorded", "at": "2026-05-22T13:15:00-06:00", "amount": 600, "currency": "MXN", "method": "transfer", "statusAfter": "partially_paid" }
+  ]
+}

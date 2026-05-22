@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ticketschema.org/schema/v0.1/profiles/payment-receipt.json",
+  "ticketSchemaVersion": "0.1",
+  "id": "ts_01HX0000000000000000000001",
+  "documentType": "payment_receipt",
+  "status": "paid",
+  "issuedAt": "2026-05-22T10:00:00-06:00",
+  "currency": "MXN",
+  "parties": [
+    { "role": "issuer", "name": "Café Ejemplo" },
+    { "role": "recipient", "name": "Cliente" }
+  ],
+  "amounts": {
+    "subtotal": 100,
+    "tax": 16,
+    "total": 116,
+    "paid": 116,
+    "balance": 0
+  },
+  "items": [
+    {
+      "description": "Café americano",
+      "quantity": 2,
+      "unitPrice": 50,
+      "total": 100
+    }
+  ],
+  "events": [
+    {
+      "type": "issued",
+      "at": "2026-05-22T10:00:00-06:00",
+      "by": "issuer"
+    },
+    {
+      "type": "payment_recorded",
+      "at": "2026-05-22T10:00:10-06:00",
+      "amount": 116,
+      "currency": "MXN",
+      "method": "card",
+      "statusAfter": "paid"
+    }
+  ]
+}

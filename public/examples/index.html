@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ticket Schema Examples</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 1040px; margin: 48px auto; padding: 0 16px; line-height: 1.55; }
+      a { color: inherit; }
+      code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      pre { background: #111; color: #eee; padding: 16px; overflow: auto; font-size: 13px; }
+      .card { border-top: 1px solid #ddd; padding: 24px 0; }
+      .nav a { margin-right: 16px; }
+    </style>
+  </head>
+  <body>
+    <p><a href="/">← Ticket Schema</a></p>
+    <h1>Examples</h1>
+    <p>Ejemplos v0.1 de documentos Ticket Schema.</p>
+    <p class="nav"><a href="/validator/">Validator</a><a href="https://github.com/TicketSchema/ticket-schema/tree/main/examples/v0.1">GitHub examples</a></p>
+    <article class="card">
+  <h2>Delivery Note Mx</h2>
+  <p><strong>Tipo:</strong> <code>delivery_note</code> · <strong>Status:</strong> <code>fulfilled</code></p>
+  <p><a href="/examples/v0.1/delivery-note-mx.json">Ver JSON crudo</a></p>
+  <pre>{
+  &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/delivery-note.json&quot;,
+  &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
+  &quot;id&quot;: &quot;ts_01HX0000000000000000000103&quot;,
+  &quot;documentType&quot;: &quot;delivery_note&quot;,
+  &quot;status&quot;: &quot;fulfilled&quot;,
+  &quot;issuedAt&quot;: &quot;2026-05-22T14:15:00-06:00&quot;,
+  &quot;parties&quot;: [
+    {
+      &quot;role&quot;: &quot;sender&quot;,
+      &quot;name&quot;: &quot;Bodega Central&quot;
+    },
+    {
+      &quot;role&quot;: &quot;receiver&quot;,
+      &quot;name&quot;: &quot;Sucursal Roma&quot;
+    }
+  ],
+  &quot;items&quot;: [
+    {
+      &quot;description&quot;: &quot;Caja de refacciones&quot;,
+      &quot;quantity&quot;: 3,
+      &quot;unit&quot;: &quot;box&quot;
+    }
+  ],
+  &quot;events&quot;: [
+    {
+      &quot;type&quot;: &quot;issued&quot;,
+      &quot;at&quot;: &quot;2026-05-22T14:15:00-06:00&quot;,
+      &quot;by&quot;: &quot;sender&quot;
+    },
+    {
+      &quot;type&quot;: &quot;delivery_recorded&quot;,
+      &quot;at&quot;: &quot;2026-05-22T16:45:00-06:00&quot;,
+      &quot;by&quot;: &quot;sender&quot;,
+      &quot;statusAfter&quot;: &quot;fulfilled&quot;
+    },
+    {
+      &quot;type&quot;: &quot;received_confirmed&quot;,
+      &quot;at&quot;: &quot;2026-05-22T16:50:00-06:00&quot;,
+      &quot;by&quot;: &quot;receiver&quot;,
+      &quot;statusAfter&quot;: &quot;fulfilled&quot;
+    }
+  ]
+}</pre>
+</article>
+<article class="card">
+  <h2>Loan Note</h2>
+  <p><strong>Tipo:</strong> <code>loan_note</code> · <strong>Status:</strong> <code>partially_paid</code></p>
+  <p><a href="/examples/v0.1/loan-note.json">Ver JSON crudo</a></p>
+  <pre>{
+  &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/loan-note.json&quot;,
+  &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
+  &quot;id&quot;: &quot;ts_01HX0000000000000000000002&quot;,
+  &quot;documentType&quot;: &quot;loan_note&quot;,
+  &quot;status&quot;: &quot;partially_paid&quot;,
+  &quot;issuedAt&quot;: &quot;2026-05-22T12:00:00-06:00&quot;,
+  &quot;currency&quot;: &quot;MXN&quot;,
+  &quot;parties&quot;: [
+    {
+      &quot;role&quot;: &quot;issuer&quot;,
+      &quot;name&quot;: &quot;Albin&quot;
+    },
+    {
+      &quot;role&quot;: &quot;recipient&quot;,
+      &quot;name&quot;: &quot;Carlos&quot;
+    }
+  ],
+  &quot;amounts&quot;: {
+    &quot;total&quot;: 1500,
+    &quot;paid&quot;: 500,
+    &quot;balance&quot;: 1000
+  },
+  &quot;terms&quot;: {
+    &quot;dueDate&quot;: &quot;2026-06-15&quot;,
+    &quot;description&quot;: &quot;Préstamo personal&quot;
+  },
+  &quot;events&quot;: [
+    {
+      &quot;type&quot;: &quot;issued&quot;,
+      &quot;at&quot;: &quot;2026-05-22T12:00:00-06:00&quot;,
+      &quot;by&quot;: &quot;issuer&quot;
+    },
+    {
+      &quot;type&quot;: &quot;payment_recorded&quot;,
+      &quot;at&quot;: &quot;2026-05-29T10:00:00-06:00&quot;,
+      &quot;amount&quot;: 500,
+      &quot;currency&quot;: &quot;MXN&quot;,
+      &quot;method&quot;: &quot;cash&quot;,
+      &quot;statusAfter&quot;: &quot;partially_paid&quot;
+    }
+  ]
+}</pre>
+</article>
+<article class="card">
+  <h2>Payment Receipt</h2>
+  <p><strong>Tipo:</strong> <code>payment_receipt</code> · <strong>Status:</strong> <code>paid</code></p>
+  <p><a href="/examples/v0.1/payment-receipt.json">Ver JSON crudo</a></p>
+  <pre>{
+  &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/payment-receipt.json&quot;,
+  &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
+  &quot;id&quot;: &quot;ts_01HX0000000000000000000001&quot;,
+  &quot;documentType&quot;: &quot;payment_receipt&quot;,
+  &quot;status&quot;: &quot;paid&quot;,
+  &quot;issuedAt&quot;: &quot;2026-05-22T10:00:00-06:00&quot;,
+  &quot;currency&quot;: &quot;MXN&quot;,
+  &quot;parties&quot;: [
+    {
+      &quot;role&quot;: &quot;issuer&quot;,
+      &quot;name&quot;: &quot;Café Ejemplo&quot;
+    },
+    {
+      &quot;role&quot;: &quot;recipient&quot;,
+      &quot;name&quot;: &quot;Cliente&quot;
+    }
+  ],
+  &quot;amounts&quot;: {
+    &quot;subtotal&quot;: 100,
+    &quot;tax&quot;: 16,
+    &quot;total&quot;: 116,
+    &quot;paid&quot;: 116,
+    &quot;balance&quot;: 0
+  },
+  &quot;items&quot;: [
+    {
+      &quot;description&quot;: &quot;Café americano&quot;,
+      &quot;quantity&quot;: 2,
+      &quot;unitPrice&quot;: 50,
+      &quot;total&quot;: 100
+    }
+  ],
+  &quot;events&quot;: [
+    {
+      &quot;type&quot;: &quot;issued&quot;,
+      &quot;at&quot;: &quot;2026-05-22T10:00:00-06:00&quot;,
+      &quot;by&quot;: &quot;issuer&quot;
+    },
+    {
+      &quot;type&quot;: &quot;payment_recorded&quot;,
+      &quot;at&quot;: &quot;2026-05-22T10:00:10-06:00&quot;,
+      &quot;amount&quot;: 116,
+      &quot;currency&quot;: &quot;MXN&quot;,
+      &quot;method&quot;: &quot;card&quot;,
+      &quot;statusAfter&quot;: &quot;paid&quot;
+    }
+  ]
+}</pre>
+</article>
+<article class="card">
+  <h2>Payment Request Mx</h2>
+  <p><strong>Tipo:</strong> <code>payment_request</code> · <strong>Status:</strong> <code>pending</code></p>
+  <p><a href="/examples/v0.1/payment-request-mx.json">Ver JSON crudo</a></p>
+  <pre>{
+  &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/payment-request.json&quot;,
+  &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
+  &quot;id&quot;: &quot;ts_01HX0000000000000000000102&quot;,
+  &quot;documentType&quot;: &quot;payment_request&quot;,
+  &quot;status&quot;: &quot;pending&quot;,
+  &quot;issuedAt&quot;: &quot;2026-05-22T09:00:00-06:00&quot;,
+  &quot;currency&quot;: &quot;MXN&quot;,
+  &quot;parties&quot;: [
+    {
+      &quot;role&quot;: &quot;payee&quot;,
+      &quot;name&quot;: &quot;Taller El Rápido&quot;
+    },
+    {
+      &quot;role&quot;: &quot;payer&quot;,
+      &quot;name&quot;: &quot;Cliente&quot;
+    }
+  ],
+  &quot;amounts&quot;: {
+    &quot;total&quot;: 750,
+    &quot;paid&quot;: 0,
+    &quot;balance&quot;: 750
+  },
+  &quot;terms&quot;: {
+    &quot;dueDate&quot;: &quot;2026-05-29&quot;,
+    &quot;description&quot;: &quot;Anticipo pendiente por reparación&quot;
+  },
+  &quot;events&quot;: [
+    {
+      &quot;type&quot;: &quot;issued&quot;,
+      &quot;at&quot;: &quot;2026-05-22T09:00:00-06:00&quot;,
+      &quot;by&quot;: &quot;payee&quot;
+    },
+    {
+      &quot;type&quot;: &quot;payment_requested&quot;,
+      &quot;at&quot;: &quot;2026-05-22T09:00:01-06:00&quot;,
+      &quot;amount&quot;: 750,
+      &quot;currency&quot;: &quot;MXN&quot;,
+      &quot;statusAfter&quot;: &quot;pending&quot;
+    }
+  ]
+}</pre>
+</article>
+<article class="card">
+  <h2>Retail Receipt Mx</h2>
+  <p><strong>Tipo:</strong> <code>retail_receipt</code> · <strong>Status:</strong> <code>paid</code></p>
+  <p><a href="/examples/v0.1/retail-receipt-mx.json">Ver JSON crudo</a></p>
+  <pre>{
+  &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json&quot;,
+  &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
+  &quot;id&quot;: &quot;ts_01HX0000000000000000000101&quot;,
+  &quot;documentType&quot;: &quot;retail_receipt&quot;,
+  &quot;status&quot;: &quot;paid&quot;,
+  &quot;issuedAt&quot;: &quot;2026-05-22T18:30:00-06:00&quot;,
+  &quot;currency&quot;: &quot;MXN&quot;,
+  &quot;parties&quot;: [
+    {
+      &quot;role&quot;: &quot;seller&quot;,
+      &quot;name&quot;: &quot;Abarrotes Lupita&quot;
+    },
+    {
+      &quot;role&quot;: &quot;buyer&quot;,
+      &quot;name&quot;: &quot;Cliente mostrador&quot;
+    }
+  ],
+  &quot;amounts&quot;: {
+    &quot;subtotal&quot;: 86,
+    &quot;tax&quot;: 0,
+    &quot;total&quot;: 86,
+    &quot;paid&quot;: 86,
+    &quot;balance&quot;: 0
+  },
+  &quot;items&quot;: [
+    {
+      &quot;description&quot;: &quot;Leche 1L&quot;,
+      &quot;quantity&quot;: 1,
+      &quot;unitPrice&quot;: 28,
+      &quot;total&quot;: 28
+    },
+    {
+      &quot;description&quot;: &quot;Pan dulce&quot;,
+      &quot;quantity&quot;: 4,
+      &quot;unitPrice&quot;: 14.5,
+      &quot;total&quot;: 58
+    }
+  ],
+  &quot;events&quot;: [
+    {
+      &quot;type&quot;: &quot;issued&quot;,
+      &quot;at&quot;: &quot;2026-05-22T18:30:00-06:00&quot;,
+      &quot;by&quot;: &quot;seller&quot;
+    },
+    {
+      &quot;type&quot;: &quot;payment_recorded&quot;,
+      &quot;at&quot;: &quot;2026-05-22T18:30:05-06:00&quot;,
+      &quot;amount&quot;: 86,
+      &quot;currency&quot;: &quot;MXN&quot;,
+      &quot;method&quot;: &quot;cash&quot;,
+      &quot;statusAfter&quot;: &quot;paid&quot;
+    }
+  ]
+}</pre>
+</article>
+<article class="card">
+  <h2>Service Record Mx</h2>
+  <p><strong>Tipo:</strong> <code>service_record</code> · <strong>Status:</strong> <code>partially_paid</code></p>
+  <p><a href="/examples/v0.1/service-record-mx.json">Ver JSON crudo</a></p>
+  <pre>{
+  &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/service-record.json&quot;,
+  &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
+  &quot;id&quot;: &quot;ts_01HX0000000000000000000104&quot;,
+  &quot;documentType&quot;: &quot;service_record&quot;,
+  &quot;status&quot;: &quot;partially_paid&quot;,
+  &quot;issuedAt&quot;: &quot;2026-05-22T11:20:00-06:00&quot;,
+  &quot;currency&quot;: &quot;MXN&quot;,
+  &quot;parties&quot;: [
+    {
+      &quot;role&quot;: &quot;service_provider&quot;,
+      &quot;name&quot;: &quot;Plomería García&quot;
+    },
+    {
+      &quot;role&quot;: &quot;customer&quot;,
+      &quot;name&quot;: &quot;Cliente&quot;
+    }
+  ],
+  &quot;amounts&quot;: {
+    &quot;total&quot;: 1200,
+    &quot;paid&quot;: 600,
+    &quot;balance&quot;: 600
+  },
+  &quot;terms&quot;: {
+    &quot;description&quot;: &quot;Cambio de mezcladora y revisión de fuga&quot;,
+    &quot;dueDate&quot;: &quot;2026-05-25&quot;
+  },
+  &quot;events&quot;: [
+    {
+      &quot;type&quot;: &quot;issued&quot;,
+      &quot;at&quot;: &quot;2026-05-22T11:20:00-06:00&quot;,
+      &quot;by&quot;: &quot;service_provider&quot;
+    },
+    {
+      &quot;type&quot;: &quot;service_completed&quot;,
+      &quot;at&quot;: &quot;2026-05-22T13:10:00-06:00&quot;,
+      &quot;by&quot;: &quot;service_provider&quot;,
+      &quot;statusAfter&quot;: &quot;fulfilled&quot;
+    },
+    {
+      &quot;type&quot;: &quot;payment_recorded&quot;,
+      &quot;at&quot;: &quot;2026-05-22T13:15:00-06:00&quot;,
+      &quot;amount&quot;: 600,
+      &quot;currency&quot;: &quot;MXN&quot;,
+      &quot;method&quot;: &quot;transfer&quot;,
+      &quot;statusAfter&quot;: &quot;partially_paid&quot;
+    }
+  ]
+}</pre>
+</article>
+  </body>
+</html>

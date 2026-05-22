@@ -61,6 +61,12 @@ curl -X POST https://ticketschema.org/api/validate \
   --data @examples/v0.1/retail-receipt-mx.json
 ```
 
+Examples:
+
+```text
+https://ticketschema.org/examples/
+```
+
 ## Repository layout
 
 ```text
