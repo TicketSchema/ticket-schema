@@ -39,6 +39,12 @@ Apps should say:
 - `Ticket Schema-compatible`
 - `Validated by Ticket Schema`
 
+## Validator
+
+```bash
+python3 tools/ticket_schema_validator.py validate examples/v0.1/retail-receipt-mx.json
+```
+
 ## Repository layout
 
 ```text
@@ -46,7 +52,8 @@ schema/v0.1/core.schema.json
 schema/v0.1/profiles/*.schema.json
 examples/v0.1/*.json
 docs/*.md
-tests/validate_examples.py
+tools/ticket_schema_validator.py
+tests/*.py
 ```
 
 ## License
