@@ -3,19 +3,44 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ticket Schema Validator</title>
+    <title>Ticket Schema</title>
     <style>
-      body { font-family: system-ui, sans-serif; max-width: 920px; margin: 40px auto; padding: 0 16px; }
-      textarea { width: 100%; min-height: 360px; font-family: ui-monospace, monospace; font-size: 14px; }
-      button { padding: 10px 16px; margin: 12px 0; cursor: pointer; }
+      body { font-family: system-ui, sans-serif; max-width: 920px; margin: 48px auto; padding: 0 16px; line-height: 1.55; }
+      code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
       pre { background: #111; color: #eee; padding: 16px; overflow: auto; }
-      .ok { color: #087f23; } .bad { color: #b00020; }
+      a { color: inherit; }
+      .hero { margin-bottom: 32px; }
+      .nav a { margin-right: 16px; }
+      .badge { display: inline-block; border: 1px solid #111; padding: 4px 8px; border-radius: 999px; font-size: 14px; }
     </style>
   </head>
   <body>
-    <h1>Ticket Schema Validator</h1>
-    <p>Valida documentos JSON contra Ticket Schema v0.1.</p>
-    <textarea id="input">{
+    <main>
+      <section class="hero">
+        <p class="badge">v0.1 draft</p>
+        <h1>Ticket Schema</h1>
+        <p>
+          Estándar abierto JSON Schema para tickets, recibos y comprobantes digitales.
+          Diseñado para reemplazar papel físico con documentos portables, verificables y fáciles de validar.
+        </p>
+        <p class="nav">
+          <a href="/validator/">Validator</a>
+          <a href="https://github.com/TicketSchema/ticket-schema">GitHub</a>
+          <a href="/api/validate">API</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Objetivo</h2>
+        <p>
+          Crear un formato común para apps que generan o consumen tickets digitales:
+          ventas, pagos, solicitudes de pago, entregas, préstamos y servicios.
+        </p>
+      </section>
+
+      <section>
+        <h2>Ejemplo mínimo</h2>
+        <pre>{
   "$schema": "https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json",
   "ticketSchemaVersion": "0.1",
   "id": "ts_01HX0000000000000000000101",
@@ -23,37 +48,24 @@
   "status": "paid",
   "issuedAt": "2026-05-22T18:30:00-06:00",
   "currency": "MXN",
-  "parties": [{ "role": "seller", "name": "Abarrotes Lupita" }],
   "amounts": { "total": 86, "paid": 86, "balance": 0 },
-  "items": [{ "description": "Leche 1L", "quantity": 1, "unitPrice": 28, "total": 28 }],
-  "events": [{ "type": "issued", "at": "2026-05-22T18:30:00-06:00", "by": "seller" }]
-}</textarea>
-    <br />
-    <button id="validate">Validate</button>
-    <h2 id="status"></h2>
-    <pre id="output"></pre>
-    <script>
-      const input = document.querySelector('#input');
-      const output = document.querySelector('#output');
-      const status = document.querySelector('#status');
-      document.querySelector('#validate').onclick = async () => {
-        try {
-          const doc = JSON.parse(input.value);
-          const res = await fetch('/api/validate', {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(doc),
-          });
-          const json = await res.json();
-          status.textContent = json.valid ? 'Valid' : 'Invalid';
-          status.className = json.valid ? 'ok' : 'bad';
-          output.textContent = JSON.stringify(json, null, 2);
-        } catch (err) {
-          status.textContent = 'Invalid JSON';
-          status.className = 'bad';
-          output.textContent = String(err);
-        }
-      };
-    </script>
+  "items": []
+}</pre>
+      </section>
+
+      <section>
+        <h2>REST API</h2>
+        <pre>POST /api/validate
+content-type: application/json</pre>
+        <p>Respuesta válida:</p>
+        <pre>{ "valid": true, "errors": [] }</pre>
+      </section>
+
+      <section>
+        <h2>Compatibilidad</h2>
+        <p>Apps podrán decir:</p>
+        <pre>Validated by Ticket Schema</pre>
+      </section>
+    </main>
   </body>
 </html>

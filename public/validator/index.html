@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ticket Schema Validator</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 920px; margin: 40px auto; padding: 0 16px; }
+      a { color: inherit; }
+      textarea { width: 100%; min-height: 360px; font-family: ui-monospace, monospace; font-size: 14px; }
+      button { padding: 10px 16px; margin: 12px 0; cursor: pointer; }
+      pre { background: #111; color: #eee; padding: 16px; overflow: auto; }
+      .ok { color: #087f23; } .bad { color: #b00020; }
+    </style>
+  </head>
+  <body>
+    <p><a href="/">← Ticket Schema</a></p>
+    <h1>Validator</h1>
+    <p>Valida documentos JSON contra Ticket Schema v0.1.</p>
+    <textarea id="input">{
+  "$schema": "https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json",
+  "ticketSchemaVersion": "0.1",
+  "id": "ts_01HX0000000000000000000101",
+  "documentType": "retail_receipt",
+  "status": "paid",
+  "issuedAt": "2026-05-22T18:30:00-06:00",
+  "currency": "MXN",
+  "parties": [{ "role": "seller", "name": "Abarrotes Lupita" }],
+  "amounts": { "total": 86, "paid": 86, "balance": 0 },
+  "items": [{ "description": "Leche 1L", "quantity": 1, "unitPrice": 28, "total": 28 }],
+  "events": [{ "type": "issued", "at": "2026-05-22T18:30:00-06:00", "by": "seller" }]
+}</textarea>
+    <br />
+    <button id="validate">Validate</button>
+    <h2 id="status"></h2>
+    <pre id="output"></pre>
+    <script>
+      const input = document.querySelector('#input');
+      const output = document.querySelector('#output');
+      const status = document.querySelector('#status');
+      document.querySelector('#validate').onclick = async () => {
+        try {
+          const doc = JSON.parse(input.value);
+          const res = await fetch('/api/validate', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(doc),
+          });
+          const json = await res.json();
+          status.textContent = json.valid ? 'Valid' : 'Invalid';
+          status.className = json.valid ? 'ok' : 'bad';
+          output.textContent = JSON.stringify(json, null, 2);
+        } catch (err) {
+          status.textContent = 'Invalid JSON';
+          status.className = 'bad';
+          output.textContent = String(err);
+        }
+      };
+    </script>
+  </body>
+</html>

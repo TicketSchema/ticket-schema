@@ -47,6 +47,12 @@ CLI:
 python3 tools/ticket_schema_validator.py validate examples/v0.1/retail-receipt-mx.json
 ```
 
+Web UI:
+
+```text
+https://ticketschema.org/validator/
+```
+
 REST API:
 
 ```bash
