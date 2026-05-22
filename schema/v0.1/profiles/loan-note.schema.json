@@ -1,0 +1,23 @@
+{
+  "$id": "https://paperspec.org/schema/v0.1/profiles/loan-note.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PaperSpec Loan Note Profile",
+  "allOf": [
+    { "$ref": "../core.schema.json" },
+    {
+      "type": "object",
+      "required": ["amounts", "currency", "terms"],
+      "properties": {
+        "documentType": { "const": "loan_note" },
+        "amounts": {
+          "type": "object",
+          "required": ["total", "paid", "balance"]
+        },
+        "terms": {
+          "type": "object",
+          "required": ["dueDate"]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "$id": "https://paperspec.org/schema/v0.1/profiles/payment-receipt.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PaperSpec Payment Receipt Profile",
+  "allOf": [
+    { "$ref": "../core.schema.json" },
+    {
+      "type": "object",
+      "required": ["amounts", "currency"],
+      "properties": {
+        "documentType": { "const": "payment_receipt" },
+        "amounts": {
+          "type": "object",
+          "required": ["total", "paid"]
+        }
+      }
+    }
+  ]
+}

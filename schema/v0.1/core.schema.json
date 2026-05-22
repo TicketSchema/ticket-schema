@@ -1,0 +1,209 @@
+{
+  "$id": "https://paperspec.org/schema/v0.1/core.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PaperSpec Core Document",
+  "description": "Core schema for digital documents that replace physical paper.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "paperSpecVersion",
+    "id",
+    "documentType",
+    "status",
+    "issuedAt",
+    "parties",
+    "events"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri" },
+    "paperSpecVersion": { "const": "0.1" },
+    "id": {
+      "type": "string",
+      "pattern": "^ps_[A-Za-z0-9_-]{12,}$"
+    },
+    "documentType": {
+      "type": "string",
+      "enum": [
+        "retail_receipt",
+        "payment_receipt",
+        "payment_request",
+        "loan_note",
+        "delivery_note",
+        "service_record",
+        "warranty",
+        "refund_record",
+        "reservation",
+        "ticket",
+        "custom"
+      ]
+    },
+    "customType": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "issued",
+        "accepted",
+        "rejected",
+        "pending",
+        "partially_fulfilled",
+        "fulfilled",
+        "paid",
+        "partially_paid",
+        "refunded",
+        "voided",
+        "expired",
+        "disputed",
+        "corrected",
+        "archived"
+      ]
+    },
+    "issuedAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+    "parties": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/party" }
+    },
+    "amounts": { "$ref": "#/$defs/amounts" },
+    "items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/item" }
+    },
+    "terms": { "type": "object", "additionalProperties": true },
+    "links": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/link" }
+    },
+    "attachments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/attachment" }
+    },
+    "events": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/event" }
+    },
+    "integrity": { "$ref": "#/$defs/integrity" },
+    "extensions": { "type": "object", "additionalProperties": true }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "documentType": { "const": "custom" } } },
+      "then": { "required": ["customType"] }
+    }
+  ],
+  "$defs": {
+    "party": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role"],
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": ["issuer", "recipient", "payer", "payee", "buyer", "seller", "sender", "receiver", "service_provider", "customer", "witness", "other"]
+        },
+        "name": { "type": "string" },
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "taxId": { "type": "string" },
+        "metadata": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "amounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "subtotal": { "type": "number" },
+        "discount": { "type": "number" },
+        "tax": { "type": "number" },
+        "fees": { "type": "number" },
+        "total": { "type": "number" },
+        "paid": { "type": "number" },
+        "balance": { "type": "number" }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "sku": { "type": "string" },
+        "description": { "type": "string" },
+        "quantity": { "type": "number" },
+        "unit": { "type": "string" },
+        "unitPrice": { "type": "number" },
+        "total": { "type": "number" },
+        "metadata": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "at"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "issued",
+            "accepted",
+            "rejected",
+            "payment_requested",
+            "payment_recorded",
+            "payment_failed",
+            "delivery_recorded",
+            "received_confirmed",
+            "service_completed",
+            "refund_recorded",
+            "voided",
+            "corrected",
+            "disputed",
+            "resolved",
+            "attachment_added",
+            "signature_added",
+            "custom"
+          ]
+        },
+        "at": { "type": "string", "format": "date-time" },
+        "by": { "type": "string" },
+        "amount": { "type": "number" },
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "method": { "type": "string" },
+        "statusAfter": { "type": "string" },
+        "note": { "type": "string" },
+        "metadata": { "type": "object", "additionalProperties": true }
+      }
+    },
+    "link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rel", "href"],
+      "properties": {
+        "rel": { "type": "string" },
+        "href": { "type": "string", "format": "uri" },
+        "mediaType": { "type": "string" }
+      }
+    },
+    "attachment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "href"],
+      "properties": {
+        "type": { "type": "string" },
+        "href": { "type": "string", "format": "uri" },
+        "hash": { "type": "string" }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canonicalization": { "type": "string" },
+        "hash": { "type": "string" },
+        "signature": { "type": "string" },
+        "publicKey": { "type": "string" }
+      }
+    }
+  }
+}
