@@ -56,16 +56,49 @@
       </section>
 
       <section>
-        <h2>REST API</h2>
-        <pre>POST /api/validate
-POST /api/render
-POST /api/render/html
+        <h2>Cómo usarlo</h2>
+
+        <h3>1. Crear un documento</h3>
+        <p>Genera un JSON compatible con uno de los perfiles v0.1.</p>
+        <pre>{
+  "$schema": "https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json",
+  "ticketSchemaVersion": "0.1",
+  "documentType": "retail_receipt",
+  "status": "paid"
+}</pre>
+
+        <h3>2. Validarlo</h3>
+        <pre>POST https://ticket-schema.pages.dev/api/validate
 content-type: application/json</pre>
-        <p>Validación:</p>
         <pre>{ "valid": true, "errors": [] }</pre>
-        <p>Render JSON:</p>
-        <pre>{ "valid": true, "html": "&lt;div class=\"ticket-schema-render\"&gt;..." }</pre>
-        <p>Render HTML directo responde <code>text/html</code>.</p>
+
+        <h3>3. Renderizarlo como ticket</h3>
+        <p>Para obtener HTML dentro de JSON:</p>
+        <pre>POST https://ticket-schema.pages.dev/api/render
+content-type: application/json
+
+{
+  "document": { "...": "Ticket Schema JSON" }
+}</pre>
+        <pre>{
+  "valid": true,
+  "errors": [],
+  "html": "&lt;div class=\"ticket-schema-render\"&gt;...&lt;/div&gt;"
+}</pre>
+
+        <p>Para obtener una página HTML directa:</p>
+        <pre>POST https://ticket-schema.pages.dev/api/render/html
+content-type: application/json
+
+{
+  "document": { "...": "Ticket Schema JSON" }
+}</pre>
+        <p>Responde <code>text/html</code>, listo para previsualizar o insertar.</p>
+
+        <h3>4. Render embebible por URL</h3>
+        <p>Si el documento ya está publicado como JSON, usa:</p>
+        <pre>https://ticket-schema.pages.dev/render/?src=/examples/v0.1/retail-receipt-mx.json</pre>
+        <pre>&lt;iframe src="https://ticket-schema.pages.dev/render/?src=/examples/v0.1/retail-receipt-mx.json"&gt;&lt;/iframe&gt;</pre>
       </section>
 
       <section>
