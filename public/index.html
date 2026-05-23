@@ -5,107 +5,284 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ticket Schema</title>
     <style>
-      body { font-family: system-ui, sans-serif; max-width: 920px; margin: 48px auto; padding: 0 16px; line-height: 1.55; }
-      code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-      pre { background: #111; color: #eee; padding: 16px; overflow: auto; }
+      :root {
+        --text: #111;
+        --muted: #5f6368;
+        --border: #e8e8e8;
+        --surface: #fff;
+        --soft: #f7f7f7;
+        --accent: #16a34a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--text);
+        background: radial-gradient(circle at top, #effaf3 0, #fff 320px);
+        line-height: 1.55;
+      }
       a { color: inherit; }
-      .hero { margin-bottom: 32px; }
-      .nav a { margin-right: 16px; }
-      .badge { display: inline-block; border: 1px solid #111; padding: 4px 8px; border-radius: 999px; font-size: 14px; }
+      code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      pre {
+        margin: 12px 0 0;
+        padding: 14px;
+        overflow: auto;
+        color: #f4f4f5;
+        background: #111;
+        border-radius: 14px;
+        font-size: 13px;
+        line-height: 1.45;
+      }
+      .page { max-width: 1120px; margin: 0 auto; padding: 28px 20px 72px; }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 10px 0 48px;
+      }
+      .brand { font-weight: 700; letter-spacing: -0.03em; text-decoration: none; }
+      .nav { display: flex; flex-wrap: wrap; gap: 8px; }
+      .nav a, .button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 7px 13px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255,255,255,.72);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .nav a:hover, .button:hover { border-color: #cfcfcf; }
+      .button.primary { background: #111; color: #fff; border-color: #111; }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+        gap: 32px;
+        align-items: center;
+        padding-bottom: 42px;
+      }
+      .badge {
+        display: inline-flex;
+        width: fit-content;
+        padding: 5px 10px;
+        border-radius: 999px;
+        background: #dcfce7;
+        color: #166534;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+      }
+      h1 { margin: 14px 0 14px; font-size: clamp(42px, 7vw, 72px); line-height: .98; letter-spacing: -0.065em; }
+      h2 { margin: 0 0 10px; font-size: 28px; letter-spacing: -0.035em; }
+      h3 { margin: 0 0 6px; font-size: 17px; letter-spacing: -0.015em; }
+      p { margin: 0; color: var(--muted); }
+      .lead { max-width: 660px; font-size: 19px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      .panel, .card, .step {
+        background: rgba(255,255,255,.86);
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        box-shadow: 0 8px 32px rgba(0,0,0,.04);
+      }
+      .panel { padding: 18px; }
+      .ticket-preview {
+        max-width: 330px;
+        margin: 0 auto;
+        padding: 22px;
+        border: 1px dashed #bbb;
+        border-radius: 16px;
+        background: #fff;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .ticket-preview .center { text-align: center; }
+      .ticket-preview .muted { color: #777; font-size: 12px; }
+      .ticket-preview .row { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; }
+      .ticket-preview .hr { border-top: 1px dashed #bbb; margin: 14px 0; }
+      .ticket-preview strong { font-size: 18px; }
+      .section { padding: 28px 0; }
+      .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+      .card { padding: 18px; }
+      .card p { font-size: 14px; }
+      .card a { display: inline-block; margin-top: 12px; font-weight: 600; text-decoration: none; }
+      .quickstart {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 18px;
+        margin-top: 16px;
+      }
+      .steps-nav {
+        position: sticky;
+        top: 16px;
+        height: fit-content;
+        display: grid;
+        gap: 8px;
+      }
+      .steps-nav a {
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: #fff;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .steps { display: grid; gap: 12px; }
+      .step { padding: 18px; }
+      .method { color: #9ca3af; }
+      .footer-note { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 14px; }
+      @media (max-width: 820px) {
+        .topbar { align-items: flex-start; flex-direction: column; padding-bottom: 28px; }
+        .hero, .quickstart { grid-template-columns: 1fr; }
+        .cards { grid-template-columns: 1fr; }
+        .steps-nav { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
     </style>
   </head>
   <body>
-    <main>
-      <section class="hero">
-        <p class="badge">v0.1 draft</p>
-        <h1>Ticket Schema</h1>
-        <p>
-          Estándar abierto JSON Schema para tickets, recibos y comprobantes digitales.
-          Diseñado para reemplazar papel físico con documentos portables, verificables y fáciles de validar.
-        </p>
-        <p class="nav">
-          <a href="/validator/">Validator</a>
+    <div class="page">
+      <header class="topbar">
+        <a class="brand" href="/">Ticket Schema</a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="/validator/">Validate</a>
           <a href="/examples/">Examples</a>
-          <a href="/render/?src=/examples/v0.1/retail-receipt-mx.json">Render</a>
+          <a href="/render/?src=/examples/v0.1/retail-receipt-mx.json">Preview</a>
           <a href="https://github.com/TicketSchema/ticket-schema">GitHub</a>
-          <a href="/api/validate">API</a>
-        </p>
-      </section>
+        </nav>
+      </header>
 
-      <section>
-        <h2>Objetivo</h2>
-        <p>
-          Crear un formato común para apps que generan o consumen tickets digitales:
-          ventas, pagos, solicitudes de pago, entregas, préstamos y servicios.
-        </p>
-      </section>
+      <main>
+        <section class="hero">
+          <div>
+            <span class="badge">v0.1 draft</span>
+            <h1>Tickets digitales, simples y validables.</h1>
+            <p class="lead">
+              Ticket Schema es un estándar abierto JSON Schema para tickets, recibos y comprobantes digitales.
+              Sirve para reemplazar papel físico con documentos portables, verificables y fáciles de renderizar.
+            </p>
+            <div class="actions">
+              <a class="button primary" href="/validator/">Validar un JSON</a>
+              <a class="button" href="/examples/">Ver ejemplos</a>
+              <a class="button" href="https://github.com/TicketSchema/ticket-schema">GitHub</a>
+            </div>
+          </div>
 
-      <section>
-        <h2>Ejemplo mínimo</h2>
-        <pre>{
+          <aside class="panel" aria-label="Ticket preview">
+            <div class="ticket-preview">
+              <div class="center"><strong>Abarrotes Lupita</strong></div>
+              <div class="center muted">retail receipt · paid</div>
+              <div class="hr"></div>
+              <div class="row muted"><span>Leche 1L</span><span>28.00 MXN</span></div>
+              <div class="row muted"><span>Pan dulce</span><span>58.00 MXN</span></div>
+              <div class="hr"></div>
+              <div class="row"><strong>Total</strong><strong>86.00 MXN</strong></div>
+              <div class="hr"></div>
+              <div class="center muted">Validated by Ticket Schema</div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" aria-labelledby="what-you-can-do">
+          <h2 id="what-you-can-do">Qué puedes hacer</h2>
+          <p>Las acciones principales están separadas para que no tengas que leer toda la documentación.</p>
+          <div class="cards">
+            <article class="card">
+              <h3>Validar</h3>
+              <p>Prueba si un documento cumple con un perfil Ticket Schema.</p>
+              <a href="/validator/">Abrir validator →</a>
+            </article>
+            <article class="card">
+              <h3>Explorar ejemplos</h3>
+              <p>Revisa tickets de venta, pagos, entregas, préstamos y servicios.</p>
+              <a href="/examples/">Abrir examples →</a>
+            </article>
+            <article class="card">
+              <h3>Previsualizar</h3>
+              <p>Renderiza un JSON como ticket ligero para iframe o vista web.</p>
+              <a href="/render/?src=/examples/v0.1/retail-receipt-mx.json">Abrir preview →</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="quickstart">
+          <h2 id="quickstart">Uso rápido</h2>
+          <p>Flujo mínimo para integrar Ticket Schema en una app.</p>
+
+          <div class="quickstart">
+            <aside class="steps-nav" aria-label="Quickstart steps">
+              <a href="#create">1. Crear JSON</a>
+              <a href="#validate">2. Validar</a>
+              <a href="#render-json">3. Render JSON</a>
+              <a href="#render-html">4. Render HTML</a>
+              <a href="#embed">5. Iframe</a>
+            </aside>
+
+            <div class="steps">
+              <article class="step" id="create">
+                <h3>1. Crear un documento</h3>
+                <p>Genera un JSON compatible con uno de los perfiles v0.1.</p>
+                <pre>{
   "$schema": "https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json",
   "ticketSchemaVersion": "0.1",
-  "id": "ts_01HX0000000000000000000101",
   "documentType": "retail_receipt",
   "status": "paid",
-  "issuedAt": "2026-05-22T18:30:00-06:00",
   "currency": "MXN",
-  "amounts": { "total": 86, "paid": 86, "balance": 0 },
-  "items": []
+  "amounts": { "total": 86, "paid": 86, "balance": 0 }
 }</pre>
-      </section>
+              </article>
 
-      <section>
-        <h2>Cómo usarlo</h2>
-
-        <h3>1. Crear un documento</h3>
-        <p>Genera un JSON compatible con uno de los perfiles v0.1.</p>
-        <pre>{
-  "$schema": "https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json",
-  "ticketSchemaVersion": "0.1",
-  "documentType": "retail_receipt",
-  "status": "paid"
-}</pre>
-
-        <h3>2. Validarlo</h3>
-        <pre>POST https://ticket-schema.pages.dev/api/validate
+              <article class="step" id="validate">
+                <h3>2. Validarlo</h3>
+                <pre><span class="method">POST</span> https://ticket-schema.pages.dev/api/validate
 content-type: application/json</pre>
-        <pre>{ "valid": true, "errors": [] }</pre>
+                <pre>{ "valid": true, "errors": [] }</pre>
+              </article>
 
-        <h3>3. Renderizarlo como ticket</h3>
-        <p>Para obtener HTML dentro de JSON:</p>
-        <pre>POST https://ticket-schema.pages.dev/api/render
+              <article class="step" id="render-json">
+                <h3>3. Obtener HTML dentro de JSON</h3>
+                <pre><span class="method">POST</span> https://ticket-schema.pages.dev/api/render
 content-type: application/json
 
 {
   "document": { "...": "Ticket Schema JSON" }
 }</pre>
-        <pre>{
+                <pre>{
   "valid": true,
   "errors": [],
   "html": "&lt;div class=\"ticket-schema-render\"&gt;...&lt;/div&gt;"
 }</pre>
+              </article>
 
-        <p>Para obtener una página HTML directa:</p>
-        <pre>POST https://ticket-schema.pages.dev/api/render/html
+              <article class="step" id="render-html">
+                <h3>4. Obtener HTML directo</h3>
+                <pre><span class="method">POST</span> https://ticket-schema.pages.dev/api/render/html
 content-type: application/json
 
 {
   "document": { "...": "Ticket Schema JSON" }
 }</pre>
-        <p>Responde <code>text/html</code>, listo para previsualizar o insertar.</p>
+                <p>Responde <code>text/html</code>, listo para previsualizar o insertar.</p>
+              </article>
 
-        <h3>4. Render embebible por URL</h3>
-        <p>Si el documento ya está publicado como JSON, usa:</p>
-        <pre>https://ticket-schema.pages.dev/render/?src=/examples/v0.1/retail-receipt-mx.json</pre>
-        <pre>&lt;iframe src="https://ticket-schema.pages.dev/render/?src=/examples/v0.1/retail-receipt-mx.json"&gt;&lt;/iframe&gt;</pre>
-      </section>
+              <article class="step" id="embed">
+                <h3>5. Embed por URL</h3>
+                <p>Si el documento ya está publicado como JSON, usa el renderer embebible.</p>
+                <pre>https://ticket-schema.pages.dev/render/?src=/examples/v0.1/retail-receipt-mx.json</pre>
+                <pre>&lt;iframe src="https://ticket-schema.pages.dev/render/?src=/examples/v0.1/retail-receipt-mx.json"&gt;&lt;/iframe&gt;</pre>
+              </article>
+            </div>
+          </div>
+        </section>
 
-      <section>
-        <h2>Compatibilidad</h2>
-        <p>Apps podrán decir:</p>
-        <pre>Validated by Ticket Schema</pre>
-      </section>
-    </main>
+        <p class="footer-note">
+          Apps compatibles pueden mostrar: <strong>Validated by Ticket Schema</strong>.
+          API técnica completa en <a href="/api/validate">/api/validate</a>, <a href="/api/render">/api/render</a> y <a href="/api/render/html">/api/render/html</a>.
+        </p>
+      </main>
+    </div>
   </body>
 </html>
