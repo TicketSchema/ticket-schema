@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -158,13 +158,13 @@
   <body>
     <div class="page">
       <header class="topbar">
-        <a class="brand" href="/">Ticket Schema</a>
+        <a class="brand" href="/en/">Ticket Schema</a>
         <nav class="nav" aria-label="Primary navigation">
           <a href="/validator/">Validate</a>
           <a href="/examples/">Examples</a>
           <a href="/render/?src=/examples/v0.1/retail-receipt-mx.json">Preview</a>
           <a href="https://github.com/TicketSchema/ticket-schema">GitHub</a>
-          <a href="/en/" lang="en">English</a>
+          <a href="/" lang="es">Español</a>
         </nav>
       </header>
 
@@ -172,28 +172,28 @@
         <section class="hero">
           <div>
             <span class="badge">v0.1 draft</span>
-            <h1>Tickets digitales, simples y validables.</h1>
+            <h1>Simple, validatable digital tickets.</h1>
             <p class="lead">
-              Ticket Schema es un estándar abierto JSON Schema para tickets, recibos y comprobantes digitales.
-              Sirve para reemplazar papel físico con documentos portables, verificables y fáciles de renderizar.
+              Ticket Schema is an open JSON Schema standard for digital tickets, receipts, and proofs of transaction.
+              It replaces paper with portable documents that are easy to validate and render.
             </p>
             <p class="notice">
-              <strong>Importante:</strong> Ticket Schema está diseñado para documentos no fiscales. No sustituye facturas, CFDI ni comprobantes fiscales exigidos por una autoridad tributaria.
+              <strong>Important:</strong> Ticket Schema is designed for non-fiscal documents. It does not replace invoices, tax receipts, or documents required by a tax authority.
             </p>
             <div class="actions">
-              <a class="button primary" href="/validator/">Validar un JSON</a>
-              <a class="button" href="/examples/">Ver ejemplos</a>
+              <a class="button primary" href="/validator/">Validate JSON</a>
+              <a class="button" href="/examples/">View examples</a>
               <a class="button" href="https://github.com/TicketSchema/ticket-schema">GitHub</a>
             </div>
           </div>
 
           <aside class="panel" aria-label="Ticket preview">
             <div class="ticket-preview">
-              <div class="center"><strong>Abarrotes Lupita</strong></div>
+              <div class="center"><strong>Lupita Groceries</strong></div>
               <div class="center muted">retail receipt · paid</div>
               <div class="hr"></div>
-              <div class="row muted"><span>Leche 1L</span><span>28.00 MXN</span></div>
-              <div class="row muted"><span>Pan dulce</span><span>58.00 MXN</span></div>
+              <div class="row muted"><span>Milk 1L</span><span>28.00 MXN</span></div>
+              <div class="row muted"><span>Sweet bread</span><span>58.00 MXN</span></div>
               <div class="hr"></div>
               <div class="row"><strong>Total</strong><strong>86.00 MXN</strong></div>
               <div class="hr"></div>
@@ -203,35 +203,35 @@
         </section>
 
         <section class="section" aria-labelledby="what-you-can-do">
-          <h2 id="what-you-can-do">Qué puedes hacer</h2>
-          <p>Las acciones principales están separadas para que no tengas que leer toda la documentación.</p>
+          <h2 id="what-you-can-do">What you can do</h2>
+          <p>The main actions are separated so you do not have to scan the full documentation.</p>
           <div class="cards">
             <article class="card">
-              <h3>Validar</h3>
-              <p>Prueba si un documento cumple con un perfil Ticket Schema.</p>
-              <a href="/validator/">Abrir validator →</a>
+              <h3>Validate</h3>
+              <p>Check whether a document complies with a Ticket Schema profile.</p>
+              <a href="/validator/">Open validator →</a>
             </article>
             <article class="card">
-              <h3>Explorar ejemplos</h3>
-              <p>Revisa tickets de venta, pagos, entregas, préstamos y servicios.</p>
-              <a href="/examples/">Abrir examples →</a>
+              <h3>Explore examples</h3>
+              <p>Browse retail tickets, payments, deliveries, loans, and service records.</p>
+              <a href="/examples/">Open examples →</a>
             </article>
             <article class="card">
-              <h3>Previsualizar</h3>
-              <p>Renderiza un JSON como ticket ligero para iframe o vista web.</p>
-              <a href="/render/?src=/examples/v0.1/retail-receipt-mx.json">Abrir preview →</a>
+              <h3>Preview</h3>
+              <p>Render JSON as a lightweight ticket for an iframe or web view.</p>
+              <a href="/render/?src=/examples/v0.1/retail-receipt-mx.json">Open preview →</a>
             </article>
           </div>
         </section>
 
         <section class="section" aria-labelledby="quickstart">
-          <h2 id="quickstart">Uso rápido</h2>
-          <p>Flujo mínimo para integrar Ticket Schema en una app.</p>
+          <h2 id="quickstart">Quickstart</h2>
+          <p>A minimal flow for integrating Ticket Schema into an app.</p>
 
           <div class="quickstart">
             <aside class="steps-nav" aria-label="Quickstart steps">
-              <a href="#create">1. Crear JSON</a>
-              <a href="#validate">2. Validar</a>
+              <a href="#create">1. Create JSON</a>
+              <a href="#validate">2. Validate</a>
               <a href="#render-json">3. Render JSON</a>
               <a href="#render-html">4. Render HTML</a>
               <a href="#embed">5. Iframe</a>
@@ -239,8 +239,8 @@
 
             <div class="steps">
               <article class="step" id="create">
-                <h3>1. Crear un documento</h3>
-                <p>Genera un JSON compatible con uno de los perfiles v0.1.</p>
+                <h3>1. Create a document</h3>
+                <p>Generate JSON compatible with one of the v0.1 profiles.</p>
                 <pre>{
   "$schema": "https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json",
   "ticketSchemaVersion": "0.1",
@@ -252,14 +252,14 @@
               </article>
 
               <article class="step" id="validate">
-                <h3>2. Validarlo</h3>
+                <h3>2. Validate it</h3>
                 <pre><span class="method">POST</span> https://ticket-schema.pages.dev/api/validate
 content-type: application/json</pre>
                 <pre>{ "valid": true, "errors": [] }</pre>
               </article>
 
               <article class="step" id="render-json">
-                <h3>3. Obtener HTML dentro de JSON</h3>
+                <h3>3. Get HTML inside JSON</h3>
                 <pre><span class="method">POST</span> https://ticket-schema.pages.dev/api/render
 content-type: application/json
 
@@ -274,19 +274,19 @@ content-type: application/json
               </article>
 
               <article class="step" id="render-html">
-                <h3>4. Obtener HTML directo</h3>
+                <h3>4. Get direct HTML</h3>
                 <pre><span class="method">POST</span> https://ticket-schema.pages.dev/api/render/html
 content-type: application/json
 
 {
   "document": { "...": "Ticket Schema JSON" }
 }</pre>
-                <p>Responde <code>text/html</code>, listo para previsualizar o insertar.</p>
+                <p>Returns <code>text/html</code>, ready to preview or embed.</p>
               </article>
 
               <article class="step" id="embed">
-                <h3>5. Embed por URL</h3>
-                <p>Si el documento ya está publicado como JSON, usa el renderer embebible.</p>
+                <h3>5. URL embed</h3>
+                <p>If the document is already published as JSON, use the embeddable renderer.</p>
                 <pre>https://ticket-schema.pages.dev/render/?src=/examples/v0.1/retail-receipt-mx.json</pre>
                 <pre>&lt;iframe src="https://ticket-schema.pages.dev/render/?src=/examples/v0.1/retail-receipt-mx.json"&gt;&lt;/iframe&gt;</pre>
               </article>
@@ -295,8 +295,8 @@ content-type: application/json
         </section>
 
         <p class="footer-note">
-          Apps compatibles pueden mostrar: <strong>Validated by Ticket Schema</strong>.
-          API técnica completa en <a href="/api/validate">/api/validate</a>, <a href="/api/render">/api/render</a> y <a href="/api/render/html">/api/render/html</a>.
+          Compatible apps can display: <strong>Validated by Ticket Schema</strong>.
+          Full technical API at <a href="/api/validate">/api/validate</a>, <a href="/api/render">/api/render</a> and <a href="/api/render/html">/api/render/html</a>.
         </p>
       </main>
     </div>
