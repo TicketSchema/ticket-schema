@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ticket Schema Render</title>
+    <style>
+      :root { color-scheme: light; }
+      body { margin: 0; background: #f5f5f5; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #111; }
+      .wrap { padding: 12px; }
+      .ticket { max-width: 360px; margin: 0 auto; background: #fff; border: 1px solid #ddd; border-radius: 10px; padding: 18px; box-shadow: 0 2px 12px #00000010; }
+      h1 { font: 700 18px system-ui, sans-serif; margin: 0 0 4px; text-align: center; }
+      .muted { color: #666; font-size: 12px; }
+      .center { text-align: center; }
+      .row { display: flex; justify-content: space-between; gap: 12px; margin: 4px 0; }
+      .hr { border-top: 1px dashed #aaa; margin: 12px 0; }
+      .item { margin: 8px 0; }
+      .item .desc { font-weight: 600; }
+      .total { font-size: 18px; font-weight: 800; }
+      .status { display: inline-block; padding: 2px 8px; border: 1px solid #111; border-radius: 999px; font-size: 11px; text-transform: uppercase; }
+      .error { color: #b00020; white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap"><div id="app" class="ticket">Loading…</div></div>
+    <script>
+      const money = (amount, currency = '') => amount == null ? '' : `${Number(amount).toFixed(2)} ${currency}`.trim();
+      const esc = (v) => String(v ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+      const firstParty = (doc, roles) => (doc.parties || []).find(p => roles.includes(p.role)) || (doc.parties || [])[0] || {};
+      const label = (type) => String(type || 'ticket').replaceAll('_', ' ');
+
+      function render(doc) {
+        const seller = firstParty(doc, ['seller', 'payee', 'service_provider', 'sender', 'lender']);
+        const buyer = firstParty(doc, ['buyer', 'payer', 'customer', 'receiver', 'borrower']);
+        const items = (doc.items || []).map(item => `
+          <div class="item">
+            <div class="desc">${esc(item.description || item.name || 'Item')}</div>
+            <div class="row muted"><span>${esc(item.quantity ?? 1)} ${esc(item.unit || '')} × ${money(item.unitPrice, doc.currency)}</span><span>${money(item.total, doc.currency)}</span></div>
+          </div>`).join('');
+        const events = (doc.events || []).slice(-3).map(e => `<div class="row muted"><span>${esc(label(e.type))}</span><span>${esc(e.at || '')}</span></div>`).join('');
+        return `
+          <h1>${esc(seller.name || 'Ticket Schema')}</h1>
+          <div class="center muted">${esc(label(doc.documentType))}</div>
+          <div class="center"><span class="status">${esc(doc.status)}</span></div>
+          <div class="hr"></div>
+          <div class="row muted"><span>ID</span><span>${esc(doc.id)}</span></div>
+          <div class="row muted"><span>Fecha</span><span>${esc(doc.issuedAt || '')}</span></div>
+          ${buyer.name ? `<div class="row muted"><span>Para</span><span>${esc(buyer.name)}</span></div>` : ''}
+          <div class="hr"></div>
+          ${items || `<div class="muted">${esc(doc.terms?.description || 'Sin partidas')}</div>`}
+          <div class="hr"></div>
+          ${doc.amounts?.subtotal != null ? `<div class="row"><span>Subtotal</span><span>${money(doc.amounts.subtotal, doc.currency)}</span></div>` : ''}
+          ${doc.amounts?.tax != null ? `<div class="row"><span>Tax</span><span>${money(doc.amounts.tax, doc.currency)}</span></div>` : ''}
+          ${doc.amounts?.paid != null ? `<div class="row"><span>Pagado</span><span>${money(doc.amounts.paid, doc.currency)}</span></div>` : ''}
+          ${doc.amounts?.balance != null ? `<div class="row"><span>Saldo</span><span>${money(doc.amounts.balance, doc.currency)}</span></div>` : ''}
+          ${doc.amounts?.total != null ? `<div class="row total"><span>Total</span><span>${money(doc.amounts.total, doc.currency)}</span></div>` : ''}
+          ${events ? `<div class="hr"></div>${events}` : ''}
+          <div class="hr"></div>
+          <div class="center muted">Validated by Ticket Schema</div>`;
+      }
+
+      async function main() {
+        const app = document.querySelector('#app');
+        const src = new URLSearchParams(location.search).get('src');
+        if (!src) { app.innerHTML = '<div class="error">Missing ?src=...</div>'; return; }
+        try {
+          const res = await fetch(src);
+          const doc = await res.json();
+          app.innerHTML = render(doc);
+        } catch (err) {
+          app.innerHTML = `<div class="error">${esc(err.message || err)}</div>`;
+        }
+      }
+      main();
+    </script>
+  </body>
+</html>

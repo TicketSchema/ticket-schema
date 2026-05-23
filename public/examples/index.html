@@ -9,20 +9,24 @@
       a { color: inherit; }
       code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
       pre { background: #111; color: #eee; padding: 16px; overflow: auto; font-size: 13px; }
+      iframe { width: 100%; height: 560px; border: 1px solid #ddd; border-radius: 12px; background: #f5f5f5; }
       .card { border-top: 1px solid #ddd; padding: 24px 0; }
+      .preview { max-width: 430px; margin: 16px 0; }
       .nav a { margin-right: 16px; }
+      summary { cursor: pointer; }
     </style>
   </head>
   <body>
     <p><a href="/">← Ticket Schema</a></p>
     <h1>Examples</h1>
-    <p>Ejemplos v0.1 de documentos Ticket Schema.</p>
-    <p class="nav"><a href="/validator/">Validator</a><a href="https://github.com/TicketSchema/ticket-schema/tree/main/examples/v0.1">GitHub examples</a></p>
+    <p>Ejemplos v0.1 con render ligero tipo ticket.</p>
+    <p class="nav"><a href="/validator/">Validator</a><a href="/render/?src=/examples/v0.1/retail-receipt-mx.json">Render demo</a><a href="https://github.com/TicketSchema/ticket-schema/tree/main/examples/v0.1">GitHub examples</a></p>
     <article class="card">
   <h2>Delivery Note Mx</h2>
   <p><strong>Tipo:</strong> <code>delivery_note</code> · <strong>Status:</strong> <code>fulfilled</code></p>
-  <p><a href="/examples/v0.1/delivery-note-mx.json">Ver JSON crudo</a></p>
-  <pre>{
+  <p><a href="/examples/v0.1/delivery-note-mx.json">Ver JSON crudo</a> · <a href="/render/?src=/examples/v0.1/delivery-note-mx.json">Abrir render</a></p>
+  <div class="preview"><iframe title="Render Delivery Note Mx" src="/render/?src=/examples/v0.1/delivery-note-mx.json" loading="lazy"></iframe></div>
+  <details><summary>Ver JSON</summary><pre>{
   &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/delivery-note.json&quot;,
   &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
   &quot;id&quot;: &quot;ts_01HX0000000000000000000103&quot;,
@@ -65,13 +69,14 @@
       &quot;statusAfter&quot;: &quot;fulfilled&quot;
     }
   ]
-}</pre>
+}</pre></details>
 </article>
 <article class="card">
   <h2>Loan Note</h2>
   <p><strong>Tipo:</strong> <code>loan_note</code> · <strong>Status:</strong> <code>partially_paid</code></p>
-  <p><a href="/examples/v0.1/loan-note.json">Ver JSON crudo</a></p>
-  <pre>{
+  <p><a href="/examples/v0.1/loan-note.json">Ver JSON crudo</a> · <a href="/render/?src=/examples/v0.1/loan-note.json">Abrir render</a></p>
+  <div class="preview"><iframe title="Render Loan Note" src="/render/?src=/examples/v0.1/loan-note.json" loading="lazy"></iframe></div>
+  <details><summary>Ver JSON</summary><pre>{
   &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/loan-note.json&quot;,
   &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
   &quot;id&quot;: &quot;ts_01HX0000000000000000000002&quot;,
@@ -113,13 +118,14 @@
       &quot;statusAfter&quot;: &quot;partially_paid&quot;
     }
   ]
-}</pre>
+}</pre></details>
 </article>
 <article class="card">
   <h2>Payment Receipt</h2>
   <p><strong>Tipo:</strong> <code>payment_receipt</code> · <strong>Status:</strong> <code>paid</code></p>
-  <p><a href="/examples/v0.1/payment-receipt.json">Ver JSON crudo</a></p>
-  <pre>{
+  <p><a href="/examples/v0.1/payment-receipt.json">Ver JSON crudo</a> · <a href="/render/?src=/examples/v0.1/payment-receipt.json">Abrir render</a></p>
+  <div class="preview"><iframe title="Render Payment Receipt" src="/render/?src=/examples/v0.1/payment-receipt.json" loading="lazy"></iframe></div>
+  <details><summary>Ver JSON</summary><pre>{
   &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/payment-receipt.json&quot;,
   &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
   &quot;id&quot;: &quot;ts_01HX0000000000000000000001&quot;,
@@ -167,13 +173,14 @@
       &quot;statusAfter&quot;: &quot;paid&quot;
     }
   ]
-}</pre>
+}</pre></details>
 </article>
 <article class="card">
   <h2>Payment Request Mx</h2>
   <p><strong>Tipo:</strong> <code>payment_request</code> · <strong>Status:</strong> <code>pending</code></p>
-  <p><a href="/examples/v0.1/payment-request-mx.json">Ver JSON crudo</a></p>
-  <pre>{
+  <p><a href="/examples/v0.1/payment-request-mx.json">Ver JSON crudo</a> · <a href="/render/?src=/examples/v0.1/payment-request-mx.json">Abrir render</a></p>
+  <div class="preview"><iframe title="Render Payment Request Mx" src="/render/?src=/examples/v0.1/payment-request-mx.json" loading="lazy"></iframe></div>
+  <details><summary>Ver JSON</summary><pre>{
   &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/payment-request.json&quot;,
   &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
   &quot;id&quot;: &quot;ts_01HX0000000000000000000102&quot;,
@@ -214,13 +221,14 @@
       &quot;statusAfter&quot;: &quot;pending&quot;
     }
   ]
-}</pre>
+}</pre></details>
 </article>
 <article class="card">
   <h2>Retail Receipt Mx</h2>
   <p><strong>Tipo:</strong> <code>retail_receipt</code> · <strong>Status:</strong> <code>paid</code></p>
-  <p><a href="/examples/v0.1/retail-receipt-mx.json">Ver JSON crudo</a></p>
-  <pre>{
+  <p><a href="/examples/v0.1/retail-receipt-mx.json">Ver JSON crudo</a> · <a href="/render/?src=/examples/v0.1/retail-receipt-mx.json">Abrir render</a></p>
+  <div class="preview"><iframe title="Render Retail Receipt Mx" src="/render/?src=/examples/v0.1/retail-receipt-mx.json" loading="lazy"></iframe></div>
+  <details><summary>Ver JSON</summary><pre>{
   &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/retail-receipt.json&quot;,
   &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
   &quot;id&quot;: &quot;ts_01HX0000000000000000000101&quot;,
@@ -274,13 +282,14 @@
       &quot;statusAfter&quot;: &quot;paid&quot;
     }
   ]
-}</pre>
+}</pre></details>
 </article>
 <article class="card">
   <h2>Service Record Mx</h2>
   <p><strong>Tipo:</strong> <code>service_record</code> · <strong>Status:</strong> <code>partially_paid</code></p>
-  <p><a href="/examples/v0.1/service-record-mx.json">Ver JSON crudo</a></p>
-  <pre>{
+  <p><a href="/examples/v0.1/service-record-mx.json">Ver JSON crudo</a> · <a href="/render/?src=/examples/v0.1/service-record-mx.json">Abrir render</a></p>
+  <div class="preview"><iframe title="Render Service Record Mx" src="/render/?src=/examples/v0.1/service-record-mx.json" loading="lazy"></iframe></div>
+  <details><summary>Ver JSON</summary><pre>{
   &quot;$schema&quot;: &quot;https://ticketschema.org/schema/v0.1/profiles/service-record.json&quot;,
   &quot;ticketSchemaVersion&quot;: &quot;0.1&quot;,
   &quot;id&quot;: &quot;ts_01HX0000000000000000000104&quot;,
@@ -328,7 +337,7 @@
       &quot;statusAfter&quot;: &quot;partially_paid&quot;
     }
   ]
-}</pre>
+}</pre></details>
 </article>
   </body>
 </html>

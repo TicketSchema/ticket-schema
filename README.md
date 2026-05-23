@@ -67,6 +67,12 @@ Examples:
 https://ticketschema.org/examples/
 ```
 
+Render:
+
+```text
+https://ticketschema.org/render/?src=/examples/v0.1/retail-receipt-mx.json
+```
+
 ## Repository layout
 
 ```text
