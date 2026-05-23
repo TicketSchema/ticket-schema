@@ -58,9 +58,14 @@
       <section>
         <h2>REST API</h2>
         <pre>POST /api/validate
+POST /api/render
+POST /api/render/html
 content-type: application/json</pre>
-        <p>Respuesta válida:</p>
+        <p>Validación:</p>
         <pre>{ "valid": true, "errors": [] }</pre>
+        <p>Render JSON:</p>
+        <pre>{ "valid": true, "html": "&lt;div class=\"ticket-schema-render\"&gt;..." }</pre>
+        <p>Render HTML directo responde <code>text/html</code>.</p>
       </section>
 
       <section>
